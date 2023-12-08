@@ -2,10 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-const productRoute = require("./src/routes/products");
+const productRoutes = require("./src/routes/products");
+const authRoutes = require("./src/routes/auth");
 
 app.use(bodyParser.json()); //type JSON
 
+
+// Cors Request
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -16,6 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/v1/customer", productRoute);
+app.use("/v1/customer", productRoutes);
+app.use("/v1/auth", authRoutes);
 
 app.listen(4000);
