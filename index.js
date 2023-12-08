@@ -3,6 +3,6 @@ const app = express();
 
 const productRoute = require("./src/routes/products")
 
-app.use("/", productRoute);
+app.use("/v1/customer", productRoute);
 
 app.listen(4000);
