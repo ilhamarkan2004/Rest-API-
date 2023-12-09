@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const app = express();
 
 const productRoutes = require("./src/routes/products");
@@ -29,4 +30,13 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 
-app.listen(4000);
+mongoose
+  .connect(
+    "mongodb+srv://Arkan:8mq1rU6oJQ8OaW50@cluster0.gtbazzv.mongodb.net/?retryWrites=true&w=majority"
+  )
+  .then(() => {
+    app.listen(4000, () => {
+      console.log("Connection Success");
+    });
+  })
+  .catch((err) => console.log(err));
