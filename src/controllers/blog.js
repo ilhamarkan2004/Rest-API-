@@ -56,3 +56,20 @@ exports.getAllBlogPost = (req, res, next) => {
       next(error);
     });
 };
+
+exports.getBlogPostById = (req, res, next) => {
+  const postId = req.params.postId;
+  BlogPost.findById(postId)
+    .then((result) => {
+      if (!result) {
+        const error = new Error("BlogPost tidak ditemukan");
+        error.errorStatus(404);
+        throw error;
+      }
+      res.status(200).json({
+        message: "Data Blogpost berhasil dipanggil",
+        data: result,
+      });
+    })
+    .catch((error) => next(error));
+};
