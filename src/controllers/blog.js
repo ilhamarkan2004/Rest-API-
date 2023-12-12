@@ -25,7 +25,7 @@ exports.createBlogPost = (req, res, next) => {
 
   const Posting = new BlogPost({
     title: title,
-    image:image,
+    image: image,
     body: body,
     author: {
       uid: 1,
@@ -42,5 +42,17 @@ exports.createBlogPost = (req, res, next) => {
     })
     .catch((error) => {
       console.log(error);
+    });
+};
+exports.getAllBlogPost = (req, res, next) => {
+  BlogPost.find()
+    .then((result) => {
+      res.status(200).json({
+        message: "Data BlogPost Berhasil Dipanggil",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      next(error);
     });
 };
